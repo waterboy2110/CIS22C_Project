@@ -8,6 +8,9 @@
 
 #ifndef Team_Project_Header_h
 #define Team_Project_Header_h
+using namespace std;
+
+#include <string>
 
 const string costType[4] = {"$","$$", "$$$", "$$$$"};
 
@@ -24,7 +27,7 @@ public:
     bool setStreetName(string &aName);
     bool setNextStreet(streetList*);
     
-} // End streetList
+};  // End streetList
 
 //********************************************************
 // List of restaurant types
@@ -39,7 +42,7 @@ public:
     bool setRestaurantType(string &aType);
     bool setNextType(typeList*);
     
-}// End typeList
+};  // End typeList
 
 //********************************************************
 // Restaurant info - Street number, name, street, type,
@@ -63,7 +66,7 @@ public:
     bool getName(string &aName) const;
     bool getNumber(string &aNumber) const;
     
-}// End restaurantInfo
+};   // End restaurantInfo
 
 //********************************************************
 // Binary Node for Binary Search Tree
@@ -79,12 +82,12 @@ public:
     binaryNode();
     binaryNode (binaryNode* rightChildPtr, binaryNode* leftChildPtr, restaurantInfo* nodePtr);
     // binaryNode function
-    binaryNode *getrightChildPtr() const;
-    binaryNode *getleftChildPtr() const;
+    binaryNode * getRightChildPtr() const;
+    binaryNode * getLeftChildPtr() const;
     void setLeftChildPtr(binaryNode* leftPtr);
     void setRightChildPtr(binaryNode* rightPtr);
     
-}// End binaryNode
+};  // End binaryNode
 
 //********************************************************
 // Binary Search Tree
@@ -96,8 +99,9 @@ private:
     binaryNode* rootPtr;    // Pointer to root
 public:
     //constuctor
-     binarySearchTree(const binarySearchTree* tree);
-}// End binarySearchTree
+    binarySearchTree();
+    binarySearchTree(const binarySearchTree* tree);
+};  // End binarySearchTree
 
 
 
@@ -110,15 +114,15 @@ class hashTable
 private:
     restaurantInfo* aRestaurant;    // Pointer to a restaurant
     int numRestaurants;             // Number of restaurants in hash table
-    collisionTable* aCollision;     // Pointer to collision table
+    collisionTable *aCollision;     // Pointer to collision table
     
 public:
-bool search();
-bool getnumRestaurants(int $ aNumRestaurants);
-bool getcollisionTable (collisionTable* aCollision);
+bool search();                      // search should take an argument
+bool getNumRestaurants(int $aNumRestaurants);
+bool getCollisionTable (collisionTable *aCollision);
 
 
-}// End hashTable
+};  // End hashTable
 
 //********************************************************
 // Collision table for hash table
@@ -131,7 +135,7 @@ private:
 public:
     bool getNextC(collisionTable* nextC)const;
     bool setNextC(collisionTable*);
-}// End collisionTable
+};  // End collisionTable
 
 //********************************************************
 // List head
@@ -141,14 +145,15 @@ class listHead
 private:
     int count;              // Number of restaurants
     int arraySize;          // Size of hash table
-    pHash* hashPtr;          // Pointer to the hash array
+    // TODO: need to declare an array here
+    pHash* hashPtr;         // Pointer to the hash array
     binaryNode* BSTPtr;     // Pointer to the binary search tree
 public:
     listHead();
     listHead(int aCount, int aArraysize, pHash* aHashPtr, binaryNode* aBSTPtr );
     
     
-}// End listHead
+};  // End listHead
 
 
 #endif
