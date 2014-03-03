@@ -119,7 +119,7 @@ private:
 public:
 bool search();                      // search should take an argument
 bool getNumRestaurants(int $aNumRestaurants);
-bool getCollisionTable (collisionTable *aCollision);
+bool getCollisionTable (collisionTable *aCollision);                            //TODO - need a collision table
 
 
 };  // End hashTable
@@ -145,8 +145,8 @@ class listHead
 private:
     int count;              // Number of restaurants
     int arraySize;          // Size of hash table
-    // TODO: need to declare an array here
-    pHash* hashPtr;         // Pointer to the hash array
+                                                                                // TODO: need to declare an array here (I may have ment the collision table)
+    pHash* hashPtr;         // Pointer to the hash array                        // TODO: What is a pHash? Do we need to declare a hastTable here?
     binaryNode* BSTPtr;     // Pointer to the binary search tree
 public:
     listHead();
