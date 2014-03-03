@@ -19,7 +19,6 @@ using namespace std;
 // main prototypes
 bool processInputFile(binarySearchTree *, hashTable *);
 bool processOutputFile(binarySearchTree *);
-void menu();
 
 int main(int argc, const char * argv[])
 {
@@ -31,9 +30,10 @@ int main(int argc, const char * argv[])
      if(!processInputFile(ptrBinarySearchTree, ptrHashTable))
          return 1;
     
-    menu();
+    printMenu();
     
     success = processOutputFile(ptrBinarySearchTree);
+
     
     return 0;
 }
@@ -50,7 +50,7 @@ bool processInputFile(binarySearchTree ptrBinarySearchTree,  hashTable ptrHashTa
     string readStr;
     string fileName;
     bool empty = true;
-    fileName = "gpa.txt";
+    fileName = "Restaurants.txt";
     binaryNode node;
     
     // Open file to read, if couldn't open, display error
@@ -61,20 +61,37 @@ bool processInputFile(binarySearchTree ptrBinarySearchTree,  hashTable ptrHashTa
         cout << "Error opening " << fileName << "!\n";
         return false;
     }
-	// Process each string in the file beginnging with students PIN
+	
+    /* Data in is
+     string Restaurant Name,
+     int Address (hash key???,
+     string Street,
+     string Type,
+     string Dollar Rating.
+     */
+    
+    // Process each string in the file beginnging with the restaurant name.
     while (getline(inFile, readStr, ' '))
     {
-        //node.pin = atoi(readStr.c_str());		// Finish processing the students PIN
+        // binaryNode.??? = menuManager::removeTrailingWhiteSpace(readStr);             //finish adding the restaurant name here
         
-        getline(inFile, readStr, ';');			// Process the students name
-       // binaryNode. = menuManager::removeTrailingWhiteSpace(readStr);
+        getline(inFile, readStr, ';');			// Process address
+        //NODE??? = atoi(readStr.c_str());      // and convert to hash for key
         
-        getline(inFile, readStr);				// Process the students gpa
-        //node.gpa = atof(readStr.c_str());
+        getline(inFile, readStr);               // Process Street
+       // = menuManager::removeTrailingWhiteSpace(readStr);
         
-        //cout << "DEBUG node data: " << node.pin << " " << node.name << " " << node.gpa << endl;
+        getline(inFile, readStr);               // Process Type
+        // = menuManager::removeTrailingWhiteSpace(readStr);
+        
+        getline(inFile, readStr);               // Process Dollar Rating
+        // = menuManager::removeTrailingWhiteSpace(readStr);
+
+        
+        //cout << "DEBUG node data: " << endl;
         
        // tree->addNode(node);						// Add the node to the tree
+        // add Node to the hash table
         empty = false;
     }
     

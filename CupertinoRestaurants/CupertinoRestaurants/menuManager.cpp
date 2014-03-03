@@ -32,3 +32,95 @@ const string MENU =
 "M\tDisplay this menu\n"
 "Q\tEnd the program\n\n";
 
+/**~*~*
+ * Definition of Menu
+ * Prompt the user for a choice
+ * Pre - Input from the user
+ * Post - Calls the function the user chooses.
+ **~*~*/
+
+void printMenu(binarySearchTree *prtBinarySearchTree)
+{
+    bool success;
+    string choice;
+    
+    cout << "Type M for the menu\n";
+
+    while (!success)
+    {
+        choice = getUserChoice(); // will need the string to carry the args
+        switch (toupper(choice[0]))
+        {
+            case ADD_RESTAURANT:
+                cout << "Not Implemented\n";
+                break;
+            case DELETE_RESTAURANT:
+                cout << "Not Implemented\n";
+                break;
+            case FIND_RESTAURANT_BY_NAME:
+                cout << "Not Implemented\n";
+                break;
+            case LIST_RESTAURANTS:
+                cout << "Not Implemented\n";
+                break;
+            case PRINT_SORTED:
+                cout << "Not Implemented\n";
+                break;
+            case PRINT_TREE_LIST:
+                cout << "Not Implemented\n";
+                break;
+            case SHOW_MENU:
+                cout << MENU;
+                break;
+            case QUIT_CHOICE:
+                success = true;
+                break;
+            default:
+                cout << "Type M for the menu.\n";
+        }
+    }
+}
+
+/**~*~*
+ This function takes input from the user.
+ If the input is not valid (a valid menu choice) it
+ prompts the user to type H for help until a vailid input
+ is entered.
+ *~**/
+string getUserChoice()
+{
+	cout << ">";
+    string userChoice;
+    cin >> userChoice;
+    cin.clear();			// to clear the error flag
+	cin.ignore(80, '\n');	// to discard the unwanted input from the input buffer
+    return userChoice;
+}
+
+//*************************
+// Definition of printMenu
+// Prints the choices available
+// for the menu.
+//*************************
+void printMenu()
+{
+	cout << "\nHelp Menu\n" << SHOW_MENU;
+}
+
+//**************************************************
+// Definition of function removeTrailingWhiteSpace.
+// This function removes trailing white spaces at
+// the back of the string, str, and returns the new
+// string. Removes trailing tabs, line feeds,
+// spaces, and carriage returns.
+//**************************************************
+string removeTrailingWhiteSpace(string str)
+{
+    int i = str.length() - 1;  // zero based
+    while (str[i] == '\t' || str[i] == '\n' || str[i] == ' ' || str[i] == '\r')
+    {
+        str.erase(i, 1);
+        i--;
+    }
+    return str;
+}
