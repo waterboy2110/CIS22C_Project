@@ -55,12 +55,14 @@ private:
     int number;             // Street number
     streetList *streetPtr;  // Street pointer
     typeList *typePtr;      // Type pointer
-    costType *costPtr;      // Cost pointer
+    //costType *costPtr;      // Cost pointer - costType is no an object - can simply use *costType to point to it
+    string costPrt = *costType;
+    
 public:
     // Constructor
     restaurantInfo();
     restaurantInfo(string aName, int aNumber, streetList *aStreetPtr,
-                   typeList *aTypePtr, costType *costPtr);
+                   typeList *aTypePtr, string *costPtr);            // fixed costPtr
     
     // Restaurant info functions
     bool getName(string &aName) const;
@@ -103,7 +105,19 @@ public:
     binarySearchTree(const binarySearchTree* tree);
 };  // End binarySearchTree
 
-
+//********************************************************
+// Collision table for hash table
+// Moved collisionTable above hashTable so that it can see it
+//********************************************************
+class collisionTable
+{
+private:
+    restaurantInfo* cRestaurant;    // Pointer to restaurant info
+    collisionTable* nextC;          // Pointer to next restaurant info
+public:
+    bool getNextC(collisionTable* nextC)const;
+    bool setNextC(collisionTable*);
+};  // End collisionTable
 
 //********************************************************
 // Hash table
@@ -117,25 +131,10 @@ private:
     collisionTable *aCollision;     // Pointer to collision table
     
 public:
-bool search();                      // search should take an argument
-bool getNumRestaurants(int $aNumRestaurants);
-bool getCollisionTable (collisionTable *aCollision);                            //TODO - need a collision table
-
-
+    bool search();                      // search should take an argument
+    bool getNumRestaurants(int $aNumRestaurants);
+    bool getCollisionTable (collisionTable *aCollision);                            //TODO - can't seem to see the collisionTable
 };  // End hashTable
-
-//********************************************************
-// Collision table for hash table
-//********************************************************
-class collisionTable
-{
-private:
-    restaurantInfo* cRestaurant;    // Pointer to restaurant info
-    collisionTable* nextC;          // Pointer to next restaurant info
-public:
-    bool getNextC(collisionTable* nextC)const;
-    bool setNextC(collisionTable*);
-};  // End collisionTable
 
 //********************************************************
 // List head
@@ -146,11 +145,13 @@ private:
     int count;              // Number of restaurants
     int arraySize;          // Size of hash table
                                                                                 // TODO: need to declare an array here (I may have ment the collision table)
-    pHash* hashPtr;         // Pointer to the hash array                        // TODO: What is a pHash? Do we need to declare a hastTable here?
+   // pHash* hashPtr;         // Pointer to the hash array
+    // TODO: What is a pHash? Do we need to declare a hastTable here?
+    hashTable *hashPtr;      // Added hashTable as object to declare the pointer 3.09.14
     binaryNode* BSTPtr;     // Pointer to the binary search tree
 public:
     listHead();
-    listHead(int aCount, int aArraysize, pHash* aHashPtr, binaryNode* aBSTPtr );
+    listHead(int aCount, int aArraysize, hashTable* aHashPtr, binaryNode* aBSTPtr );
     
     
 };  // End listHead
