@@ -1,95 +1,123 @@
 //
 //  main.cpp
-//  Team Project
+//  CupertinoRestaurants
 //
-//  Created by Yenni Chu on 2/24/14.
-//  Copyright (c) 2014 Yenni Chu. All rights reserved.
+//  CIS 22C Winter Quarter
+//  Team Project: Team #3
+//  Members: Christina Sok, Anny Chu, James Agua
+//  Created by Lina on 3/1/14.
+//  Copyright (c) 2014 Lina. All rights reserved.
 //
 
 #include <iostream>
-#include <fstream>
-#include <cstdlib>
+#include "Header.h"
+#include "menuManager.h"
+
 using namespace std;
+//using namespace System;
 
-void readfile();
+// main prototypes
+bool processInputFile(binarySearchTree *, hashTable *);
+bool processOutputFile(binarySearchTree *);
 
-
-int main()
+int main(int argc, const char * argv[])
 {
-     readfile();
+    // Create pointers to objects to pass to the menu
+    binarySearchTree *ptrBinarySearchTree = new binarySearchTree;
+    hashTable *ptrHashTable = new hashTable;
+    bool success;
+    
+     if(!processInputFile(ptrBinarySearchTree, ptrHashTable))
+         return 1;
+    
+    printMenu();
+    
+    success = processOutputFile(ptrBinarySearchTree);
 
+    
+    return 0;
 }
 
-void readfile()
+// Definition of processInputFile
+// Process the input file and
+// add each restaurant to the tree
+// and the hash table.
+// Pre - pointer to the BST and hashTable.
+// Post - returns true if successful.
+bool processInputFile(binarySearchTree ptrBinarySearchTree,  hashTable ptrHashTable)
 {
-    char buffer[50];
-    string restaurantName;
-    int addressNum;
-    string     streetName;
-    string  RestaurantType;
-    string costType;
+    ifstream inFile;
+    string readStr;
+    string fileName;
+    bool empty = true;
+    fileName = "Restaurants.txt";
+    binaryNode node;
     
-    ifstream fin;
-    fin.open("Restaurants.txt");
-    if(!fin)
+    // Open file to read, if couldn't open, display error
+    // and exit with false
+    inFile.open(fileName);
+    if (!inFile)
     {
-        cout << "Error opening file input.txt" <<endl;  //Error open file message
-        exit(0);
+        cout << "Error opening " << fileName << "!\n";
+        return false;
     }
-    while (!fin.eof())
-    {
-        
+	
+    /* Data in is
+     string Restaurant Name,
+     int Address (hash key???,
+     string Street,
+     string Type,
+     string Dollar Rating.
+     */
     
-        fin.getline(buffer, 50,'\n');
-        restaurantName = buffer;
+    // Process each string in the file beginnging with the restaurant name.
+    while (getline(inFile, readStr, ' '))
+    {
+        // binaryNode.??? = menuManager::removeTrailingWhiteSpace(readStr);             //finish adding the restaurant name here
         
-        fin.getline(buffer, 50,'\n');
-        addressNum =atoi( buffer);
+        getline(inFile, readStr, ';');			// Process address
+        //NODE??? = atoi(readStr.c_str());      // and convert to hash for key
         
+        getline(inFile, readStr);               // Process Street
+       // = menuManager::removeTrailingWhiteSpace(readStr);
         
-        fin.getline(buffer, 50,'\n');
-        streetName = buffer;
+        getline(inFile, readStr);               // Process Type
+        // = menuManager::removeTrailingWhiteSpace(readStr);
         
-        fin.getline(buffer, 50,'\n');
-        RestaurantType = buffer;
+        getline(inFile, readStr);               // Process Dollar Rating
+        // = menuManager::removeTrailingWhiteSpace(readStr);
 
         
-        fin.getline(buffer, 50,'\n');
-        costType = buffer;
+        //cout << "DEBUG node data: " << endl;
         
-        
-        
-        
-        cout << restaurantName <<" - "<<addressNum<< " - "<<streetName<<" - "<<RestaurantType<<" - "<< costType <<endl;
-        
-        
-        
-        
+       // tree->addNode(node);						// Add the node to the tree
+        // add Node to the hash table
+        empty = false;
     }
     
+    inFile.close();
     
-    fin.close();
+    if (empty)
+        return false;
     
+    return true;
+}
+
+// Defintion of processOutputFile
+// Writes to a file called output.txt
+// from the BST. Output file will retain
+// preordered structure.
+// Pre - A pointer to the Binary Search Tree.
+// Post - True if data is written to the file.
+bool processOutputFile(binarySearchTree ptrBinarySearchTree)
+{
     
-    
+    return true;
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// Calls the menu manager
+void menu()
+{
+    menuManager();
+}
